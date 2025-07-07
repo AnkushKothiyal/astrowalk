@@ -311,7 +311,7 @@ st.markdown("### 📅 Enter your Date of Birth")
 date = st.date_input("", min_value=datetime.date(1950, 1, 1), label_visibility="collapsed")
 
 st.markdown("### 💭 What do you need help with?")
-situation = st.text_area("", placeholder="I am struggling to get married", label_visibility="collapsed")
+situation = st.text_area("", placeholder="I am struggling to get married")
 
 # Get zodiac sign function
 def get_zodiac_sign(month: int, day: int) -> str:
@@ -365,11 +365,11 @@ prompt = f"""
 genai.configure(api_key=st.secrets["key"])
 
 # Remarks
-remark1 = f'''As a {zodiac_sign}, you share this sign with nearly a billion others. While astrology can be fun and meaningful to some, 
+remark1 = f'''As for you being a {zodiac_sign}, you share this sign with nearly a billion others. While astrology can be fun, 
 it's important to remember that scientific studies have found no evidence that planets or stars influence our personalities or destinies. 
 You are unique because of who you are, not because of your birth sign.'''
 
-remark2 = "Don't let them fool you, Astrology is a proven Pseudoscience: https://en.wikipedia.org/wiki/Astrology_and_science"
+remark2 = "Astrology is a proven Pseudoscience: https://en.wikipedia.org/wiki/Astrology_and_science"
 
 # Submit button
 if st.button("🌟 Submit"):
