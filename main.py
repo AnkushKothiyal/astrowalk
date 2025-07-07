@@ -33,10 +33,10 @@ st.markdown('<p class="subtitle">Enter your date of birth and what you\'d like g
 
 # Form inputs with custom styling
 st.markdown("### 📅 Enter your Date of Birth")
-date = st.date_input("", min_value=datetime.date(1950, 1, 1), label_visibility="collapsed")
+date = st.date_input("Date of Birth", min_value=datetime.date(1950, 1, 1), label_visibility="collapsed")
 
 st.markdown("### 💭 What do you need help with?")
-situation = st.text_area("", placeholder="I am struggling to find love", label_visibility="collapsed")
+situation = st.text_area("What do you need help with?", placeholder="I am struggling to find love", label_visibility="collapsed")
 
 # Get zodiac sign function
 def get_zodiac_sign(month: int, day: int) -> str:
@@ -97,7 +97,7 @@ You are unique because of who you are, not because of your birth sign.'''
 remark2 = "Don't let them fool you, Astrology is a proven Pseudoscience: https://en.wikipedia.org/wiki/Astrology_and_science"
 
 # Submit button
-if st.button("🌟 Submit"):
+if st.button("🌟 Submit", help="Click to get your personalized reading"):
     if not situation.strip():
         st.error("Please enter what you need help with!")
     else:
