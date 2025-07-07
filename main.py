@@ -299,6 +299,52 @@ st.markdown("""
             padding: 1.5rem;
         }
     }
+    /* More specific textarea targeting with higher specificity */
+    .stTextArea textarea,
+    .stTextArea > div > div > textarea,
+    div[data-testid="stTextArea"] textarea,
+    div[data-testid="stTextArea"] > div > div > textarea {
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 12px !important;
+        padding: 15px !important;
+        font-size: 16px !important;
+        transition: all 0.3s ease !important;
+        background: #f8f9fa !important;
+        font-family: 'Poppins', sans-serif !important;
+        color: #333333 !important; /* Explicit text color */
+    }
+
+    .stTextArea textarea:focus,
+    .stTextArea > div > div > textarea:focus,
+    div[data-testid="stTextArea"] textarea:focus,
+    div[data-testid="stTextArea"] > div > div > textarea:focus {
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+        transform: translateY(-2px) !important;
+        color: #333333 !important; /* Explicit text color on focus */
+    }
+
+    /* Placeholder styling */
+    .stTextArea textarea::placeholder,
+    .stTextArea > div > div > textarea::placeholder,
+    div[data-testid="stTextArea"] textarea::placeholder,
+    div[data-testid="stTextArea"] > div > div > textarea::placeholder {
+        color: #999999 !important;
+        opacity: 1 !important;
+    }
+
+    /* Alternative approach - target by attribute */
+    textarea[aria-label=""],
+    textarea[placeholder*="struggling"] {
+        background: #f8f9fa !important;
+        color: #333333 !important;
+    }
+
+    /* Fallback for all textareas */
+    textarea {
+        background: #f8f9fa !important;
+        color: #333333 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -311,7 +357,7 @@ st.markdown("### 📅 Enter your Date of Birth")
 date = st.date_input("", min_value=datetime.date(1950, 1, 1), label_visibility="collapsed")
 
 st.markdown("### 💭 What do you need help with?")
-situation = st.text_area("", placeholder="I am struggling to get married")
+situation = st.text_area("", placeholder="I am struggling to get married", label_visibility="collapsed")
 
 # Get zodiac sign function
 def get_zodiac_sign(month: int, day: int) -> str:
@@ -365,11 +411,11 @@ prompt = f"""
 genai.configure(api_key=st.secrets["key"])
 
 # Remarks
-remark1 = f'''As for you being a {zodiac_sign}, you share this sign with nearly a billion others. While astrology can be fun, 
+remark1 = f'''As a {zodiac_sign}, you share this sign with nearly a billion others. While astrology can be fun and meaningful to some, 
 it's important to remember that scientific studies have found no evidence that planets or stars influence our personalities or destinies. 
 You are unique because of who you are, not because of your birth sign.'''
 
-remark2 = "Astrology is a proven Pseudoscience: https://en.wikipedia.org/wiki/Astrology_and_science"
+remark2 = "Don't let them fool you, Astrology is a proven Pseudoscience: https://en.wikipedia.org/wiki/Astrology_and_science"
 
 # Submit button
 if st.button("🌟 Submit"):
